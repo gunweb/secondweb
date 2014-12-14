@@ -12,7 +12,98 @@
 	body{
 		 background-image:url(img/17.jpg);
 		 background-repeat:repeat;
+
 	}
+	#picBox{
+		 width:1200px; 
+		 height:205px;  
+		 margin:50px auto; 
+		 overflow:hidden; 
+         position:relative;
+           }
+	#picBox ul#show_pic{ 
+		 margin:0; 
+		 padding:0; 
+		 list-style:none; 
+		 height:205px; 
+		 width:3050px; 
+		 position:absolute;
+					}
+	#picBox ul#show_pic li{
+ 		 float:left; 
+ 		 margin:0; 
+ 		 padding:0; 
+		 height:205px;
+						  }
+	#picBox ul#show_pic li img{ 
+		 display:block;
+							  }
+	#icon_num{ 
+		 position:absolute; 
+		 bottom:0px; 
+		 right:10px;
+			 }
+	#icon_num li{ 
+		 float:left; 
+		 background:url() no-repeat -15px 0; 
+		 width:15px; 
+		 height:15px; 
+		 list-style:none; 
+		 color:#39F; 
+		 text-align:center; 
+		 cursor:pointer; 
+		 padding:0; 
+		 margin:0;
+		 margin-right:5px;
+				 }
+	#icon_num li:hover,#icon_num li.active{ 
+		 background:url() no-repeat 0 0; 
+		 color:#fff;
+										   }
+	#picBox_top{
+		 width:610px; 
+		 height:205px; 
+		 margin:50px auto; 
+		 position:relative; 
+		 overflow:hidden;
+				}
+	#picBox_top ul#show_pic_top{ 
+		 margin:0; 
+		 padding:0; 
+		 list-style:none; 
+		 height:205px; 
+		 width:610px; 
+		 position:absolute;
+								}
+	#picBox_top ul#show_pic_top li{ 
+		 float:left; 
+		 margin:0; 
+		 padding:0; 
+		 height:205px;
+									}
+	#picBox_top ul#show_pic_top li img{ display:block;}
+	#icon_num_top{ 
+		 position:absolute; 
+		 bottom:0px; 
+		 right:10px;
+				  }
+	#icon_num_top li{ 
+		 float:left; 
+		 background:url() no-repeat -15px 0;
+		 width:15px; 
+		 height:15px; 
+		 list-style:none; 
+		 color:#39F; 
+		 text-align:center;  
+		 cursor:pointer; 
+		 padding:0; 
+		 margin:0;
+		 margin-right:5px;
+					}
+	#icon_num_top li:hover,#icon_num_top li.active{ 
+		 background:url() no-repeat 0 0; 
+		 color:#fff;
+												  }
 	ul
 	{
 		 list-style-type:none;
@@ -163,6 +254,99 @@
 	 <li><a href="#tp">嘉家燕窝图片</a></li>
      </ul>
      </div>
+
+    <div id="picBox">
+    	 <ul id="show_pic" style="left:0;">
+		 <li><img src=" img/a1.gif" width="300"/></li>
+		 <li><img src=" img/a2.gif" width="300"/></li>
+		 <li><img src=" img/a3.jpg" width="300"/></li>
+		 <li><img src=" img/a4.gif" width="300"/></li>
+ 		 <li><img src=" img/a5.jpg" width="300"/></li>
+		 <li><img src=" img/a6.jpg" width="300"/></li>
+		 <li><img src=" img/a7.jpg" width="300"/></li>
+		 <li><img src=" img/a8.jpg" width="300"/></li>
+		 <li><img src=" img/a9.jpg" width="300"/></li>
+		 <li><img src=" img/a10.jpg" width="300"/></li>
+		 <li><img src=" img/8.jpg" width="300"/></li>
+		 <li><img src=" img/34.jpg" width="300"/></li>
+     	 </ul>
+         <ul id="icon_num">
+         <li class="active">1</li>
+         <li>2</li>
+         <li>3</li>
+         </ul>
+   </div>
+    	<script type="text/javascript">
+			 var glide =new function(){
+   			 function $id(id){return document.getElementById(id);};
+    			 this.layerGlide=function(auto,oEventCont,oSlider,sSingleSize,second,fSpeed,point){
+        			 var oSubLi = $id(oEventCont).getElementsByTagName('li');
+       				 var interval,timeout,oslideRange;
+       				 var time=1;
+        			 var speed = fSpeed
+       				 var sum = oSubLi.length;
+       				 var a=0;
+       				 var delay=second * 1000;
+        	 var setValLeft=function(s){
+            	 return function(){
+                	 oslideRange = Math.abs(parseInt($id(oSlider).style[point]));
+               			 $id(oSlider).style[point] =-Math.floor(oslideRange+(parseInt(s*sSingleSize) - oslideRange)*speed) +'px';
+                if(oslideRange==[(sSingleSize * s)]){
+                    clearInterval(interval);
+                    a=s;
+                }
+            }
+        };
+        	 var setValRight=function(s){
+           		 return function(){
+                	 oslideRange = Math.abs(parseInt($id(oSlider).style[point]));
+                		 $id(oSlider).style[point] =-Math.ceil(oslideRange+(parseInt(s*sSingleSize) - oslideRange)*speed) +'px';
+                if(oslideRange==[(sSingleSize * s)]){
+                    clearInterval(interval);
+                    a=s;
+                }
+            }
+        }
+        	 function autoGlide(){
+            	 for(var c=0;c<sum;c++){oSubLi[c].className='';};
+            	 clearTimeout(interval);
+            		 if(a==(parseInt(sum)-1)){
+                  		 for(var c=0;c<sum;c++){oSubLi[c].className='';};
+               		 a=0;
+                oSubLi[a].className="active";
+                interval = setInterval(setValLeft(a),time);
+                timeout = setTimeout(autoGlide,delay);
+           			 }else{
+               				 a++;
+                oSubLi[a].className="active";
+                interval = setInterval(setValRight(a),time);
+                timeout = setTimeout(autoGlide,delay);
+            }
+        }
+        		if(auto){timeout = setTimeout(autoGlide,delay);};
+        			 for(var i=0;i<sum;i++){
+           				 oSubLi.onmouseover = (function(i){
+                			 return function(){
+                    		 for(var c=0;c<sum;c++){oSubLi[c].className='';};
+                    clearTimeout(timeout);
+                    clearInterval(interval);
+                    oSubLi.className="active";
+                if(Math.abs(parseInt($id(oSlider).style[point]))>[(sSingleSize * i)]){
+                        interval = setInterval(setValLeft(i),time);
+                        this.onmouseout=function(){if(auto){timeout = setTimeout(autoGlide,delay);};};
+                    }
+                    else if(Math.abs(parseInt($id(oSlider).style[point]))<[(sSingleSize * i)]){
+                            interval = setInterval(setValRight(i),time);
+                        this.onmouseout=function(){if(auto){timeout = setTimeout(autoGlide,delay);};};
+                    }
+                }
+            })(i)
+        }
+    }
+}
+glide.layerGlide(true,'icon_num','show_pic',610,2,0.1,'left');
+</script>
+		    
     <div class="wrapper" style="width:1300px;">
 		 <div class="container">
     	 	 <div class="header"><h1 class="header">嘉家燕窝堂基本信息</h1></div>
